@@ -16,12 +16,13 @@ router.get(
   "/:id",
   md.checkAccountId, async (req, res, next) => {
     // DO YOUR MAGIC
-    try {
-      const data = await Account.getById(req.params.id)
-      res.json(data)
-    } catch (err) {
-      next(err);
-    }
+    res.json(req.account)
+    // try {
+    //   const data = await Account.getById(req.params.id)
+    //   res.json(data)
+    // } catch (err) {
+    //   next(err);
+    // }
   }
 );
 
