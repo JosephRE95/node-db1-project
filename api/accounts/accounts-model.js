@@ -17,7 +17,16 @@ const getById = id => {
 
 const create = account => {
   // DO YOUR MAGIC
+  const [accountId] = db('accounts').inster(account)
+  const data = getById(accountId)
+  return data
 }
+
+// async function create(shipper) {
+//   const [shipperId] = await db('shippers').insert(shipper)
+//   const result = await getById(shipperId)
+//   return result
+// }
 
 const updateById = (id, account) => {
   // DO YOUR MAGIC
