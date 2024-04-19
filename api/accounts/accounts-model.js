@@ -11,11 +11,9 @@ const getAll = () => {
 
 const getById = id => {
   // DO YOUR MAGIC
+ return db('accounts').where('id',id).first()
 }
-// async function getById(shipperId) {
-//   const result = await db('shippers').where('shipperid', shipperId).first()
-//   return result
-//   }
+
 
 const create = account => {
   // DO YOUR MAGIC
