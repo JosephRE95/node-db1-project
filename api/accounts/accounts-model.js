@@ -33,8 +33,14 @@ const updateById = (id, account) => {
 }
 
 const deleteById = id => {
-  // DO YOUR MAGIC
+  return db('accounts').where('id', id).del()
 }
+
+// async function remove(shipperId) {
+//   const toBeDeleted = await getById(shipperId)
+//   await db('shippers').del().where('shipperid', shipperId)
+// }
+
 
 module.exports = {
   getAll,

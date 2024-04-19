@@ -5,26 +5,23 @@ const Account = require("./accounts-model");
 router.get("/", async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-    const accounts = await Account.getAll()
+    const accounts = await Account.getAll();
     res.json(accounts);
   } catch (err) {
     next({ status: 422, message: "this is bad" });
   }
 });
 
-router.get(
-  "/:id",
-  md.checkAccountId, async (req, res, next) => {
-    // DO YOUR MAGIC
-    res.json(req.account)
-    // try {
-    //   const data = await Account.getById(req.params.id)
-    //   res.json(data)
-    // } catch (err) {
-    //   next(err);
-    // }
-  }
-);
+router.get("/:id", md.checkAccountId, async (req, res, next) => {
+  // DO YOUR MAGIC
+  res.json(req.account);
+  // try {
+  //   const data = await Account.getById(req.params.id)
+  //   res.json(data)
+  // } catch (err) {
+  //   next(err);
+  // }
+});
 
 router.post(
   "/",
@@ -33,7 +30,7 @@ router.post(
   async (req, res, next) => {
     // DO YOUR MAGIC
     try {
-      const NewAccount = await Account.create(req.body)
+      const NewAccount = await Account.create(req.body);
       res.status(201).json(NewAccount);
     } catch (err) {
       next(err);
@@ -50,23 +47,34 @@ router.post(
 //   }
 // })
 
-router.put("/:id", 
-md.checkAccountId, 
-md.checkAccountNameUnique,
-md.checkAccountPayload, 
-(req, res, next) => {
-  // DO YOUR MAGIC
-  try {
-    res.json("update account");
-  } catch (err) {
-    next(err);
+router.put(
+  "/:id",
+  md.checkAccountId,
+  md.checkAccountNameUnique,
+  md.checkAccountPayload,
+  (req, res, next) => {
+    // DO YOUR MAGIC
+    try {
+      res.json("update account");
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
-router.delete("/:id", md.checkAccountPayload, (req, res, next) => {
-  // DO YOUR MAGIC
+// router.delete('/:id', checkId, async (req, res, next) => {
+//   try {
+//     const data = await Shipper.remove(req.params.id)
+//     res.json(data)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+router.delete("/:id", md.checkAccountPayload, async (req, res, next) => {
   try {
-    res.json("delete account");
+    await Account.deleteById(req.params.id);
+    res.json(req.account);
   } catch (err) {
     next(err);
   }
