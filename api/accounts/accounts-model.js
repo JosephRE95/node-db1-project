@@ -15,11 +15,11 @@ const getById = id => {
 }
 
 
-const create = account => {
+const create = async account => {
   // DO YOUR MAGIC
-  const [accountId] = db('accounts').inster(account)
-  const data = getById(accountId)
-  return data
+  const [id] = await db('accounts').insert(account)
+  return getById(id)
+ 
 }
 
 // async function create(shipper) {
