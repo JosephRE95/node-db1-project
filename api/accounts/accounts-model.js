@@ -22,24 +22,25 @@ const create = async account => {
  
 }
 
-// async function create(shipper) {
-//   const [shipperId] = await db('shippers').insert(shipper)
+
+ 
+
+const updateById = async (id, account) => {
+  await db('accounts').where('id', id).update(account)
+  return getById(id)
+}
+
+// async function update(shipperId, changes) {
+//   await db('shippers').update(changes).where('shipperid', shipperId)
 //   const result = await getById(shipperId)
 //   return result
-// }
+//  }
 
-const updateById = (id, account) => {
-  // DO YOUR MAGIC
-}
+
 
 const deleteById = id => {
   return db('accounts').where('id', id).del()
 }
-
-// async function remove(shipperId) {
-//   const toBeDeleted = await getById(shipperId)
-//   await db('shippers').del().where('shipperid', shipperId)
-// }
 
 
 module.exports = {
