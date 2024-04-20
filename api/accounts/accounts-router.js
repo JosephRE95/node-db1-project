@@ -13,7 +13,6 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/:id", md.checkAccountId, async (req, res, next) => {
-  // DO YOUR MAGIC
   res.json(req.account);
   // try {
   //   const data = await Account.getById(req.params.id)
@@ -30,7 +29,10 @@ router.post(
   async (req, res, next) => {
     // DO YOUR MAGIC
     try {
-      const NewAccount = await Account.create(req.body);
+      const NewAccount = await Account.create({
+        name: req.body.name.trim(),
+        budget: req.body.budget,
+      });
       res.status(201).json(NewAccount);
     } catch (err) {
       next(err);
@@ -39,14 +41,7 @@ router.post(
 );
 
 
-// router.put('/:id', checkPayload, checkId, async (req, res, next) => {
-//   try {
-//     const data = await Shipper.update(req.params.id, req.body)
-//     res.json(data)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+
 
 
 router.put(
@@ -63,14 +58,7 @@ router.put(
   }
 );
 
-// router.delete('/:id', checkId, async (req, res, next) => {
-//   try {
-//     const data = await Shipper.remove(req.params.id)
-//     res.json(data)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+
 
 router.delete("/:id", md.checkAccountPayload, async (req, res, next) => {
   try {
@@ -82,8 +70,6 @@ router.delete("/:id", md.checkAccountPayload, async (req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-  // eslint-disable-line
-  // DO YOUR MAGIC
   res.status(err.status || 500).json({
     message: err.message,
   });
